@@ -8,18 +8,13 @@ commands:
       - checkout
       - run: npm i
       - run: npm run lint
-      - save_cache:
-          paths:
-            - ~/
-          key: dev
 
   test:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - restore_cache:
-          key: dev
+      - run: npm i
       - run: npm run test
 
   analyze:
@@ -27,8 +22,7 @@ commands:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - restore_cache:
-          key: dev
+      - run: npm i
       - run: npm run analyze
 
 workflows:
